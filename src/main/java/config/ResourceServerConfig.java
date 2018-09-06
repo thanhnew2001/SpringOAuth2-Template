@@ -13,21 +13,4 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     private static final String RESOURCE_ID = "my_rest_api";
 
-    @Override
-    public void configure(ResourceServerSecurityConfigurer resources) {
-        resources.resourceId(RESOURCE_ID).stateless(false);
-    }
-
-    @Override
-    public void configure(HttpSecurity http) throws Exception {
-        http.
-                anonymous().disable()
-                .requestMatchers().antMatchers("/students/**")
-                .and().authorizeRequests()
-                .antMatchers("/students/**").access("hasRole('ROLE_ADMIN')")
-                .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
-
-
-    }
-
 }
